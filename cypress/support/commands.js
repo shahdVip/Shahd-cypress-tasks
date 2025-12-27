@@ -24,15 +24,21 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('findByDataQa', (dataQa) => { 
-    cy.get(`[data-qa=${dataQa}]`)
-})
+Cypress.Commands.add("findByDataQa", (dataQa) => {
+  cy.get(`[data-qa=${dataQa}]`);
+});
 
-Cypress.Commands.add('loginToSauceDemo',(email,password) => {  
-    cy.visit("https://sauce-demo.myshopify.com/account/login")
-    cy.get("#customer_email").type(email)
-    cy.get("#customer_password").type(password)
-    cy.get("#customer_login [type=submit]").dblclick()
-})
+Cypress.Commands.add("loginToSauceDemo", (email, password) => {
+  cy.visit("https://sauce-demo.myshopify.com/account/login");
+  cy.get("#customer_email").type(email);
+  cy.get("#customer_password").type(password);
+  cy.get("#customer_login [type=submit]").dblclick();
+});
 
-
+Cypress.Commands.add("SearchInit", () => {
+  cy.visit("https://automationexercise.com/");
+  cy.get("header").should("be.visible");
+  cy.contains("a", "Products").click();
+  cy.url().should("include", "/products");
+  cy.contains("h2", "All Products").should("be.visible");
+});
